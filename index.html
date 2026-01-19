@@ -21,13 +21,20 @@
     <h1>🐶 Dog Detection Camera</h1>
 
     <!-- VIDEO STREAM -->
-    <img src="/video" width="640">
+    <img id="video" width="640">
 
     <h2 id="status">Loading...</h2>
 
     <script>
+        // 🔥 1. KHAI BÁO BACKEND Ở ĐÂY
+        const BACKEND = " https://increased-floors-std-kid.trycloudflare.com";
+
+        // 🔥 2. SET VIDEO STREAM
+        document.getElementById("video").src = BACKEND + "/video";
+
+        // 🔥 3. FETCH STATUS
         async function updateStatus() {
-            const res = await fetch("/status");
+            const res = await fetch(BACKEND + "/status");
             const data = await res.json();
             document.getElementById("status").innerText =
                 `Label: ${data.label} | Confidence: ${data.confidence}`;
